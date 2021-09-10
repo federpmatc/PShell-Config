@@ -3,6 +3,8 @@
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 
 #Chapter 9, Question 3
-get-adcomputer -filter  {name -like '*Server*' } | Select-Object -property @{l='computername';e={$_.name}} | Get-Hotfix
+#There seems to be a problem with piping objects into Get-HotFix.  The following provides two alternate solutions
+get-adcomputer -filter  {name -like 'Server2019*' }  | foreach {Get-HotFix -ComputerName $_.name}
 
-Get-Hotfix -computername Server2019-1,Server2019-2
+$names = get-adcomputer -filter  {name -like 'Server2019*' } | Select-Object -expandproperty name
+Get-HotFix -ComputerName $names
