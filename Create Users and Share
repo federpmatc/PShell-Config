@@ -1,0 +1,52 @@
+#Create OUs
+New-ADOrganizationalUnit -Name Students -Path "DC=ITNET, DC=pri"
+New-ADOrganizationalUnit -Name Instructors -Path "DC=ITNET, DC=pri"
+
+
+#Create Student Accounts
+$path = "OU=Students,DC=ITNET,DC=pri"
+$domainName = "ITNET.pri"
+
+#The following block of code will get executed multiple times (or whatever the value of $total is set to.
+1..10 |foreach { 
+$userName = "Student-$_"
+Write-Host "Creating user $userName@$domainName.  User $_ of $total" 
+
+New-ADUser -AccountPassword (ConvertTo-SecureString "Password01" -AsPlainText -Force) `
+-Name "$userName" `
+-Enabled $true `
+-Path $path `
+-SamAccountName "$userName" `
+-UserPrincipalName ($userName + "@" + $domainName)
+}
+
+#Create Instructor Accounts
+$path = "OU=Instructors,DC=ITNET,DC=pri"
+$domainName = "ITNET.pri"
+
+#The following block of code will get executed multiple times (or whatever the value of $total is set to.
+1..2 |foreach { 
+$userName = "Instructor-$_"
+Write-Host "Creating user $userName@$domainName.  User $_ of $total" 
+
+New-ADUser -AccountPassword (ConvertTo-SecureString "Password01" -AsPlainText -Force) `
+-Name "$userName" `
+-Enabled $true `
+-Path $path `
+-SamAccountName "$userName" `
+-UserPrincipalName ($userName + "@" + $domainName)
+}
+
+Get-ADUser -Filter "name -like 'student*'" | Remove-ADUser
+
+New-Item -Path "C:\" -Name "Data" -ItemType Directory -Force
+Get-acl "C:\Data"
+
+New-SmbShare -Path "C:\Data" -Name "Data" -FullAccess "Domain Admins", "Everyone"
+Get-SmbShareAccess -Name "Data"
+
+
+
+Get-ADUser -Filter * -SearchBase $path
+
+#Create Instructor Accounts
