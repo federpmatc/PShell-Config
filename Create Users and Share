@@ -49,4 +49,22 @@ Get-SmbShareAccess -Name "Data"
 
 Get-ADUser -Filter * -SearchBase $path
 
-#Create Instructor Accounts
+#Firewallm
+#Create GPO - linked to Student OU to Disable Power - Computer COnfig --> Admin Templates --> Start Menu & Task Bar --> Remove and Prevent Access to Shutdown//
+#Move computer account
+#Discuss Local vs Domain GPO
+#Create a GPO to map a network drive to instructors OU
+#Reuse GPO on Students OU
+#Discuss Password Policy Settings
+#Get errors, read the explain
+#Try to change password from desktop (history one day)
+#Force a change from DC
+#Remove & Join
+#Domain Credentials ITNET\Admin
+#Remove-Computer -UnjoinDomaincredential Domain01\Admin01 -PassThru -Verbose -Restart
+#Settings --> About to rename/join
+#Search for access work or school or Settings-->Accounts--> 'Access Work or School'
+#You can add domain users to the computer and then decide if they are local admins or not
+#When we leave GPOs no longer apply
+#Search for accounts, select Add, Edit or remove other users... (discuss standed vs admin)
+#Make sure to open the local group policy editor gpedit.msc
