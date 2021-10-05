@@ -8,9 +8,9 @@ New-ADUser -SamAccountName “SeanG” -Name “Sean G” -GivenName “Sean” 
 
 #Task 2
 
-Invoke-Item "C:\Program Files\internet explorer\iexplore.exe"
-Get-Content "C:\PowerShell\users.csv" 
+Notepad C:\PowerShell\Users.csv
 Import-Csv C:\Powershell\users.csv
+import-csv C:\PowerShell\users.csv | Foreach {New-ADUser -SamAccountName $_.samAccountName -Name $_.name -GivenName $_.givenName -Surname $_.surname -Path $_.path -AccountPassword (ConvertTo-SecureString $_.Password -AsPlainText -force) -PasswordNeverExpires $true -Enabled $true} 
 
 #Task 4
 NEW-ADGroup -name "IT Network Specialist - Staff" -groupscope Global -path "OU=Staff,OU=IT Network Specialist,DC=ITNET,DC=pri"
