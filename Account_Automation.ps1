@@ -12,3 +12,8 @@ Notepad C:\PowerShell\Users.csv
 import-csv C:\PowerShell\users.csv
 import-csv C:\PowerShell\users.csv | Foreach {New-ADUser -SamAccountName $_.samAccountName -Name $_.name -GivenName $_.givenName -Surname $_.surname -Path $_.path -AccountPassword (ConvertTo-SecureString $_.Password -AsPlainText -force) -PasswordNeverExpires $true -Enabled $true} 
 
+Task #4
+NEW-ADGroup -name "IT Network Specialist - Staff" -groupscope Global -path "OU=Staff,OU=IT Network Specialist,DC=ITNET,DC=pri"
+NEW-ADGroup -name "IT Network Specialist - Students" -groupscope Global -path "OU=Students,OU=IT Network Specialist,DC=ITNET,DC=pri"
+NEW-ADGroup -name "IT Support - Staff" -groupscope Global -path "OU=IT Support,DC=ITNET,DC=pri"
+
