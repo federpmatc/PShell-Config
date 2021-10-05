@@ -17,3 +17,6 @@ NEW-ADGroup -name "IT Network Specialist - Staff" -groupscope Global -path "OU=S
 NEW-ADGroup -name "IT Network Specialist - Students" -groupscope Global -path "OU=Students,OU=IT Network Specialist,DC=ITNET,DC=pri"
 NEW-ADGroup -name "IT Support - Staff" -groupscope Global -path "OU=IT Support,DC=ITNET,DC=pri"
 
+import-csv C:\PowerShell\Users.csv | Foreach-Object {add-adgroupmember -identity $_.group -members $_.name}
+
+
