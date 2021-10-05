@@ -1,5 +1,9 @@
 
 #Task 1
+New-ADOrganizationalUnit -Path "dc=ITNET,dc=pri” -Name "IT Network Specialist"
+New-ADOrganizationalUnit -Path “ou=IT Network Specialist,dc=ITNET,dc=pri" -Name "Staff"
+New-ADOrganizationalUnit -Path “ou=IT Network Specialist,dc=ITNET,dc=pri" -Name "Students"
+New-ADOrganizationalUnit -Path "dc=ITNET,dc=pri” -Name "IT Support"
 
 New-ADUser -SamAccountName “SeanG” -Name “Sean G” -GivenName “Sean” -Surname “G” -Path “ou=Staff,ou=IT Network specialist,dc=ITNET,dc=pri” -AccountPassword (ConvertTo-SecureString Password01 -AsPlainText -force) -PasswordNeverExpires $true -Enabled $true
 
