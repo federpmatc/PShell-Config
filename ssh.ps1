@@ -15,3 +15,5 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 }
 
 Get-Service sshd
+
+ssh student@192.168.211.1
