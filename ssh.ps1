@@ -1,4 +1,4 @@
-﻿#https://petri.com/the-ultimate-guide-to-installing-openssh-on-windows/
+#https://petri.com/the-ultimate-guide-to-installing-openssh-on-windows/
 #https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
 Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
@@ -16,4 +16,5 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 
 Get-Service sshd
 
+#run the following command from a command prompt (had problems with the running ssh in PowerShell)
 ssh student@192.168.211.1
