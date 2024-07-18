@@ -1,1 +1,19 @@
+$password = ConvertTo-SecureString -AsPlainText “Password01” -Force
+$path = “OU=Staff, OU=IT Network Specialist, DC=ITNET, DC=pri”
+$name = “Brian”
+New-ADUser -Name $name -SamAccountName $name -enabled $true -Path $Path -AccountPassword $password -UserPrincipalName “$name@ITNET.pri”
+$name = “Sue”
+New-ADUser -Name $name -SamAccountName $name -enabled $true -Path $Path -AccountPassword $password -UserPrincipalName “$name@ITNET.pri”
 
+#Run the following if users are unable to login to the Client or Server2
+#The commands below are run on the Client or member server, not the domain controller
+#This will remove and then rejoin the client/server to the domain
+#Launch PowerShell as an Administrator
+Remove-Computer -force    
+Restart-Computer #(forces client to reboot)
+
+#Now Logon locally to the client as  Admin2/Password01   (the Content Tab in Netlab has local administrator credentials)
+#Launch PowerShell again and 'Run as an Administrator'
+Add-Computer -domain ITNET -domaincredential ITNET\Administrator #Joins client to Domain.
+#(you will be prompted for the Domain Administrator's password - P@sdsw0rd)
+Restart-Computer   #(reboot again)
